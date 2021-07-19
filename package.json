@@ -1,0 +1,14 @@
+{
+  "name": "cleanout",
+  "version": "1.0.0",
+  "description": "App to delete emails",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Elijah Meshnick",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^17.0.2"
+  }
+}
