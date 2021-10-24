@@ -180,10 +180,9 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Navbar; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Nav; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -206,31 +205,29 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+ // import { Link } from "react-router-dom";
+// import { Navbar, NavDropdown, Container } from "react-bootstrap";
 
+var Nav = /*#__PURE__*/function (_React$Component) {
+  _inherits(Nav, _React$Component);
 
+  var _super = _createSuper(Nav);
 
-var Navbar = /*#__PURE__*/function (_React$Component) {
-  _inherits(Navbar, _React$Component);
-
-  var _super = _createSuper(Navbar);
-
-  function Navbar() {
-    _classCallCheck(this, Navbar);
+  function Nav() {
+    _classCallCheck(this, Nav);
 
     return _super.apply(this, arguments);
   }
 
-  _createClass(Navbar, [{
+  _createClass(Nav, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "BOILERMAKER"), /*#__PURE__*/React.createElement("nav", null, /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-        to: "/"
-      }, "Home"))), /*#__PURE__*/React.createElement("hr", null));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null);
     }
   }]);
 
-  return Navbar;
-}(React.Component);
+  return Nav;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 
 
