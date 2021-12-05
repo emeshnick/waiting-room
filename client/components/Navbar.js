@@ -1,15 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { Navbar, NavDropdown, Container } from "react-bootstrap";
 
 export default class Nav extends React.Component {
   render() {
     return (
       <div>
-        <Navbar variant="dark" sticky="top">
-          <Navbar.Brand>
-            <a href="/">Test App</a>
-          </Navbar.Brand>
+        <Navbar bg="light" sticky="top">
           <NavDropdown
             bg="black"
             title="Menu"
