@@ -6,11 +6,8 @@ class Home extends React.Component {
     return (
       <Container>
         <h1>Home</h1>
-        <h2>Welcome to Elijah Meshnick's Boilerplate code!</h2>
-        <p>
-          This is for a quick set up of a project that uses React, Bootstrap,
-          Redux, and Express
-        </p>
+        <h2>Waiting Room</h2>
+        <p>Add patients and see the next patient based on priority</p>
       </Container>
     );
   }

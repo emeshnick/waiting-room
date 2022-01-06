@@ -1,8 +1,8 @@
-# Boilerplate
+# Waiting Room
 
 ## Description
 
-This is a template for an easy set up of a React project. It uses React, Redux, Bootstrap, and Express.
+This is an application for creating a priority based waiting queue.
 
 ## Set up
 
