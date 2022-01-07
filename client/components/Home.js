@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Button } from "react-bootstrap";
+import { Container, Form, Button, Table } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addPerson } from "../store/people";
 
@@ -49,6 +49,24 @@ class Home extends React.Component {
             Add Person
           </Button>
         </Form>
+        <Table bordered hover>
+          <thead>
+            <tr>
+              <th>Number</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.props.queue.map((person, idx) => {
+              return (
+                <tr key={person.personName}>
+                  <td>{idx + 1}</td>
+                  <td>{person.personName}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
       </Container>
     );
   }
