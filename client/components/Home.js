@@ -7,18 +7,23 @@ class Home extends React.Component {
     this.state = {
       personName: "",
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
   }
 
   handleChange(evt) {
     this.setState({
-      [evt.targetName]: evt.target.value,
+      [evt.target.name]: evt.target.value,
     });
   }
 
-  // onSubmit(evt) {
-  //   evt.preventDefault();
-  //   console.log(this.state);
-  // }
+  onSubmit(evt) {
+    evt.preventDefault();
+    console.log(this.state);
+    this.setState({
+      personName: "",
+    });
+  }
 
   render() {
     return (
@@ -32,10 +37,12 @@ class Home extends React.Component {
             <Form.Control
               type="string"
               placeholder="Enter name"
-              defaultValue={this.state.personName}
+              name="personName"
+              value={this.state.personName}
+              onChange={this.handleChange}
             />
           </Form.Group>
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" onClick={this.onSubmit}>
             Add Person
           </Button>
         </Form>

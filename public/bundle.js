@@ -226,18 +226,25 @@ var Home = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       personName: ""
     };
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
+    _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Home, [{
     key: "handleChange",
     value: function handleChange(evt) {
-      this.setState(_defineProperty({}, evt.targetName, evt.target.value));
-    } // onSubmit(evt) {
-    //   evt.preventDefault();
-    //   console.log(this.state);
-    // }
-
+      this.setState(_defineProperty({}, evt.target.name, evt.target.value));
+    }
+  }, {
+    key: "onSubmit",
+    value: function onSubmit(evt) {
+      evt.preventDefault();
+      console.log(this.state);
+      this.setState({
+        personName: ""
+      });
+    }
   }, {
     key: "render",
     value: function render() {
@@ -247,10 +254,13 @@ var Home = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Label, null, "Patient Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Control, {
         type: "string",
         placeholder: "Enter name",
-        defaultValue: this.state.personName
+        name: "personName",
+        value: this.state.personName,
+        onChange: this.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "primary",
-        type: "submit"
+        type: "submit",
+        onClick: this.onSubmit
       }, "Add Person")));
     }
   }]);
