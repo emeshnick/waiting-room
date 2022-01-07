@@ -461,27 +461,6 @@ var Routes = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
-/***/ "./client/store/data.js":
-/*!******************************!*\
-  !*** ./client/store/data.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-  var action = arguments.length > 1 ? arguments[1] : undefined;
-
-  switch (action.type) {
-    default:
-      return state;
-  }
-});
-
-/***/ }),
-
 /***/ "./client/store/index.js":
 /*!*******************************!*\
   !*** ./client/store/index.js ***!
@@ -497,20 +476,53 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var redux_thunk__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! redux-thunk */ "./node_modules/redux-thunk/es/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! redux-devtools-extension */ "./node_modules/redux-devtools-extension/index.js");
 /* harmony import */ var redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _data_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./data.js */ "./client/store/data.js");
+/* harmony import */ var _people_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./people.js */ "./client/store/people.js");
 
 
 
 
 
 var reducer = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
-  data: _data_js__WEBPACK_IMPORTED_MODULE_4__["default"]
+  people: _people_js__WEBPACK_IMPORTED_MODULE_4__["default"]
 });
 var middleware = Object(redux_devtools_extension__WEBPACK_IMPORTED_MODULE_3__["composeWithDevTools"])(Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], Object(redux_logger__WEBPACK_IMPORTED_MODULE_1__["createLogger"])({
   collapsed: true
 })));
 var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, middleware);
 /* harmony default export */ __webpack_exports__["default"] = (store);
+
+/***/ }),
+
+/***/ "./client/store/people.js":
+/*!********************************!*\
+  !*** ./client/store/people.js ***!
+  \********************************/
+/*! exports provided: addPerson, default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPerson", function() { return addPerson; });
+var ADD_PERSON = "ADD_PERSON";
+var addPerson = function addPerson(person) {
+  return {
+    type: ADD_PERSON,
+    person: person
+  };
+};
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case ADD_PERSON:
+      var newQueue = state.push(action.person);
+      return newQueue;
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 
