@@ -1,5 +1,7 @@
 import React from "react";
 import { Container, Form, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { addPerson } from "../store/people";
 
 class Home extends React.Component {
   constructor(props) {
@@ -23,6 +25,7 @@ class Home extends React.Component {
     this.setState({
       personName: "",
     });
+    this.props.addPerson(this.state);
   }
 
   render() {
@@ -51,4 +54,16 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapState = (state) => {
+  return {
+    queue: state.people,
+  };
+};
+
+const mapDispatch = (dispatch) => {
+  return {
+    addPerson: (person) => dispatch(addPerson(person)),
+  };
+};
+
+export default connect(mapState, mapDispatch)(Home);

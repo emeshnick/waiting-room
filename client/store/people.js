@@ -10,7 +10,7 @@ export const addPerson = (person) => {
 export default function (state = [], action) {
   switch (action.type) {
     case ADD_PERSON:
-      const newQueue = state.push(action.person);
+      const newQueue = [...state, action.person];
       return newQueue;
     default:
       return state;
