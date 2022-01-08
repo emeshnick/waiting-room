@@ -228,7 +228,8 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      personName: ""
+      personName: "",
+      priority: ""
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
@@ -244,9 +245,9 @@ var Home = /*#__PURE__*/function (_React$Component) {
     key: "onSubmit",
     value: function onSubmit(evt) {
       evt.preventDefault();
-      console.log(this.state);
       this.setState({
-        personName: ""
+        personName: "",
+        priority: ""
       });
       this.props.addPerson(this.state);
     }
@@ -262,6 +263,15 @@ var Home = /*#__PURE__*/function (_React$Component) {
         name: "personName",
         value: this.state.personName,
         onChange: this.handleChange
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Group, {
+        className: "mb-3",
+        controlId: "priority"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Label, null, "Priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Control, {
+        type: "number",
+        placeholder: "Enter priority",
+        name: "priority",
+        value: this.state.priority,
+        onChange: this.handleChange
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
         variant: "primary",
         type: "submit",
@@ -269,10 +279,10 @@ var Home = /*#__PURE__*/function (_React$Component) {
       }, "Add Person")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Table"], {
         bordered: true,
         hover: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.queue.map(function (person, idx) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Priority"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.queue.map(function (person, idx) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: person.personName
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, idx + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, person.personName));
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, idx + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, person.personName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, person.priority));
       }))));
     }
   }]);
@@ -548,14 +558,34 @@ var addPerson = function addPerson(person) {
     person: person
   };
 };
+
+var priorityQueue = function priorityQueue(queue, person) {
+  var newQueue = [].concat(_toConsumableArray(queue), [person]);
+  var idx = newQueue.length - 1;
+  var parentIdx = Math.floor((idx - 1) / 2);
+  var temp;
+  console.log("new priority ", person.priority);
+  console.log("parent object:", newQueue[parentIdx]);
+
+  while (newQueue[parentIdx] && person.priority < newQueue[parentIdx].priority) {
+    console.log("is less than parent");
+    temp = newQueue[parentIdx];
+    newQueue[parentIdx] = person;
+    newQueue[idx] = temp;
+    idx = parentIdx;
+    parentIdx = Math.floor((idx - 1) / 2);
+  }
+
+  return newQueue;
+};
+
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case ADD_PERSON:
-      var newQueue = [].concat(_toConsumableArray(state), [action.person]);
-      return newQueue;
+      return priorityQueue(state, action.person);
 
     default:
       return state;

@@ -8,6 +8,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       personName: "",
+      priority: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -21,9 +22,9 @@ class Home extends React.Component {
 
   onSubmit(evt) {
     evt.preventDefault();
-    console.log(this.state);
     this.setState({
       personName: "",
+      priority: "",
     });
     this.props.addPerson(this.state);
   }
@@ -45,6 +46,16 @@ class Home extends React.Component {
               onChange={this.handleChange}
             />
           </Form.Group>
+          <Form.Group className="mb-3" controlId="priority">
+            <Form.Label>Priority</Form.Label>
+            <Form.Control
+              type="number"
+              placeholder="Enter priority"
+              name="priority"
+              value={this.state.priority}
+              onChange={this.handleChange}
+            />
+          </Form.Group>
           <Button variant="primary" type="submit" onClick={this.onSubmit}>
             Add Person
           </Button>
@@ -54,6 +65,7 @@ class Home extends React.Component {
             <tr>
               <th>Number</th>
               <th>Name</th>
+              <th>Priority</th>
             </tr>
           </thead>
           <tbody>
@@ -62,6 +74,7 @@ class Home extends React.Component {
                 <tr key={person.personName}>
                   <td>{idx + 1}</td>
                   <td>{person.personName}</td>
+                  <td>{person.priority}</td>
                 </tr>
               );
             })}
