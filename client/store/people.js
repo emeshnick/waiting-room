@@ -30,8 +30,6 @@ function addPriorityQueue(queue, person) {
 }
 
 function removePriorityQueue(queue) {
-  const queue = queue;
-
   let idx = 0;
   let leftChild = 1;
   let rightChild = 2;

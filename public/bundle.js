@@ -541,9 +541,108 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
   !*** ./client/store/people.js ***!
   \********************************/
 /*! exports provided: addPerson, removePerson, default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /Users/emeshnick/Projects/waiting-room/client/store/people.js: Identifier 'queue' has already been declared. (32:29)\n\n\u001b[0m \u001b[90m 30 |\u001b[39m }\u001b[0m\n\u001b[0m \u001b[90m 31 |\u001b[39m\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 32 |\u001b[39m \u001b[36mfunction\u001b[39m removePriorityQueue(queue) {\u001b[0m\n\u001b[0m \u001b[90m    |\u001b[39m                              \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 33 |\u001b[39m   \u001b[36mconst\u001b[39m queue \u001b[33m=\u001b[39m queue\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 34 |\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 35 |\u001b[39m   \u001b[36mlet\u001b[39m idx \u001b[33m=\u001b[39m \u001b[35m0\u001b[39m\u001b[33m;\u001b[39m\u001b[0m\n    at Object._raise (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:541:17)\n    at Object.raiseWithData (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:534:17)\n    at Object.raise (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:495:17)\n    at ScopeHandler.checkRedeclarationInScope (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:1686:12)\n    at ScopeHandler.declareName (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:1666:14)\n    at Object.checkLVal (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:10919:24)\n    at Object.checkParams (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:12615:12)\n    at Object.<anonymous> (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:12591:14)\n    at Object.parseBlockOrModuleBlockBody (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13751:23)\n    at Object.parseBlockBody (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13719:10)\n    at Object.parseBlock (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13703:10)\n    at Object.parseFunctionBody (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:12582:24)\n    at Object.parseFunctionBodyAndFinish (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:12566:10)\n    at /Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13861:12\n    at Object.withSmartMixTopicForbiddingContext (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:12899:14)\n    at Object.parseFunction (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13860:10)\n    at Object.parseFunctionStatement (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13496:17)\n    at Object.parseStatementContent (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13179:21)\n    at Object.parseStatement (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13139:17)\n    at Object.parseBlockOrModuleBlockBody (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13728:25)\n    at Object.parseBlockBody (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13719:10)\n    at Object.parseProgram (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13061:10)\n    at Object.parseTopLevel (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:13052:25)\n    at Object.parse (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:14800:10)\n    at parse (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/parser/lib/index.js:14852:38)\n    at parser (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/core/lib/parser/index.js:52:34)\n    at parser.next (<anonymous>)\n    at normalizeFile (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/core/lib/transformation/normalize-file.js:87:38)\n    at normalizeFile.next (<anonymous>)\n    at run (/Users/emeshnick/Projects/waiting-room/node_modules/@babel/core/lib/transformation/index.js:29:50)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPerson", function() { return addPerson; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removePerson", function() { return removePerson; });
+var ADD_PERSON = "ADD_PERSON";
+var REMOVE_PERSON = "REMOVE_PERSON";
+var addPerson = function addPerson(person) {
+  return {
+    type: ADD_PERSON,
+    person: person
+  };
+};
+var removePerson = function removePerson() {
+  return {
+    type: REMOVE_PERSON
+  };
+};
+
+function addPriorityQueue(queue, person) {
+  var idx = queue.length - 1;
+  var parentIdx = Math.floor((idx - 1) / 2);
+  var temp;
+
+  while (queue[parentIdx] && person.priority < queue[parentIdx].priority) {
+    temp = queue[parentIdx];
+    queue[parentIdx] = person;
+    queue[idx] = temp;
+    idx = parentIdx;
+    parentIdx = Math.floor((idx - 1) / 2);
+  }
+
+  return queue;
+}
+
+function removePriorityQueue(queue) {
+  var idx = 0;
+  var leftChild = 1;
+  var rightChild = 2;
+  var temp = queue[queue.length - 1];
+  queue[queue.length - 1] = queue[idx];
+  queue[idx] = temp; //Bubble down the swapped person by priority, while also ordering by time if two children have the same priority
+
+  while (queue[leftChild] && queue[idx].priority > queue[leftChild] || queue[rightChild] && queue[idx].priority > queue[rightChild]) {
+    if (queue[rightChild]) {
+      if (queue[leftChild].priority < queue[rightChild].priority) {
+        temp = queue[leftChild];
+        queue[leftChild] = queue[idx];
+        queue[idx] = temp;
+        idx = leftChild;
+      } else if (queue[rightChild].priority < queue[leftChild].priority) {
+        temp = queue[rightChild];
+        queue[rightChild] = queue[idx];
+        queue[idx] = temp;
+        idx = rightChild;
+      } else {
+        if (queue[leftChild].time < queue[rightChild].time) {
+          temp = queue[leftChild];
+          queue[leftChild] = queue[idx];
+          queue[idx] = temp;
+          idx = leftChild;
+        } else {
+          temp = queue[rightChild];
+          queue[rightChild] = queue[idx];
+          queue[idx] = temp;
+          idx = rightChild;
+        }
+      }
+
+      idx = rightChild;
+    } else {
+      temp = queue[leftChild];
+      queue[leftChild] = queue[idx];
+      queue[idx] = temp;
+      idx = leftChild;
+    }
+
+    leftChild = idx * 2 + 1;
+    rightChild = idx * 2 + 2;
+  }
+
+  queue.pop();
+  return queue;
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case ADD_PERSON:
+      var queue = state;
+      return addPriorityQueue(queue, action.person);
+
+    case REMOVE_PERSON:
+      return;
+
+    default:
+      return state;
+  }
+});
 
 /***/ }),
 
