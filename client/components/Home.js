@@ -26,7 +26,8 @@ class Home extends React.Component {
       personName: "",
       priority: "",
     });
-    this.props.addPerson(this.state);
+    const date = new Date();
+    this.props.addPerson({ ...this.state, time: date.getTime() });
   }
 
   render() {
