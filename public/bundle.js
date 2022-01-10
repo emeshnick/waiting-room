@@ -559,6 +559,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 var ADD_PERSON = "ADD_PERSON";
+var GET_PERSON = "GET_PERSON";
 var addPerson = function addPerson(person) {
   return {
     type: ADD_PERSON,
@@ -566,16 +567,14 @@ var addPerson = function addPerson(person) {
   };
 };
 
-var priorityQueue = function priorityQueue(queue, person) {
+function addPriorityQueue(queue, person) {
+  //Redefine queue to not mutate input
   var newQueue = [].concat(_toConsumableArray(queue), [person]);
   var idx = newQueue.length - 1;
   var parentIdx = Math.floor((idx - 1) / 2);
   var temp;
-  console.log("new priority ", person.priority);
-  console.log("parent object:", newQueue[parentIdx]);
 
   while (newQueue[parentIdx] && person.priority < newQueue[parentIdx].priority) {
-    console.log("is less than parent");
     temp = newQueue[parentIdx];
     newQueue[parentIdx] = person;
     newQueue[idx] = temp;
@@ -584,7 +583,56 @@ var priorityQueue = function priorityQueue(queue, person) {
   }
 
   return newQueue;
-};
+}
+
+function removePriorityQueue(queue) {
+  //Redefine queue to not mutate input
+  var newQueue = queue;
+  var idx = 0;
+  var leftChild = 1;
+  var rightChild = 2;
+  var temp = newQueue[newQueue.length - 1];
+  newQueue[newQueue.length - 1] = newQueue[idx];
+  newQueue[idx] = temp; //Bubble down the swapped person by priority, while also ordering by time if two children have the same priority
+
+  while (newQueue[leftChild] && newQueue[idx].priority > newQueue[leftChild] || newQueue[rightChild] && newQueue[idx].priority > newQueue[rightChild]) {
+    if (newQueue[rightChild]) {
+      if (newQueue[leftChild].priority < newQueue[rightChild].priority) {
+        temp = newQueue[leftChild];
+        newQueue[leftChild] = newQueue[idx];
+        newQueue[idx] = temp;
+        idx = leftChild;
+      } else if (newQueue[rightChild].priority < newQueue[leftChild].priority) {
+        temp = newQueue[rightChild];
+        newQueue[rightChild] = newQueue[idx];
+        newQueue[idx] = temp;
+        idx = rightChild;
+      } else {
+        if (newQueue[leftChild].time < newQueue[rightChild].time) {
+          temp = newQueue[leftChild];
+          newQueue[leftChild] = newQueue[idx];
+          newQueue[idx] = temp;
+          idx = leftChild;
+        } else {
+          temp = newQueue[rightChild];
+          newQueue[rightChild] = newQueue[idx];
+          newQueue[idx] = temp;
+          idx = rightChild;
+        }
+      }
+
+      idx = rightChild;
+    } else {
+      temp = newQueue[leftChild];
+      newQueue[leftChild] = newQueue[idx];
+      newQueue[idx] = temp;
+      idx = leftChild;
+    }
+
+    leftChild = idx * 2 + 1;
+    rightChild = idx * 2 + 2;
+  }
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -592,7 +640,10 @@ var priorityQueue = function priorityQueue(queue, person) {
 
   switch (action.type) {
     case ADD_PERSON:
-      return priorityQueue(state, action.person);
+      return addPriorityQueue(state, action.person);
+
+    case GET_PERSON:
+      return;
 
     default:
       return state;
