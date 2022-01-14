@@ -65,7 +65,7 @@ export function removePriorityQueue(queue) {
         queue[idx] = temp;
         idx = rightChild;
       } else {
-        if (queue[leftChild].time < queue[rightChild].time) {
+        if (queue[leftChild].time > queue[rightChild].time) {
           temp = queue[leftChild];
           queue[leftChild] = queue[idx];
           queue[idx] = temp;
@@ -88,8 +88,7 @@ export function removePriorityQueue(queue) {
     leftChild = idx * 2 + 1;
     rightChild = idx * 2 + 2;
   }
-  queue.pop();
-  return queue;
+  return queue.pop();
 }
 
 export default function (state = [], action) {
@@ -99,7 +98,8 @@ export default function (state = [], action) {
       return addPriorityQueue(queueToAdd, action.person);
     case REMOVE_PERSON:
       const queueToRemove = [...state];
-      return removePriorityQueue(queueToRemove);
+      removePriorityQueue(queueToRemove);
+      return queueToRemove;
     default:
       return state;
   }

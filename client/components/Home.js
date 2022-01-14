@@ -12,6 +12,7 @@ class Home extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.displayPerson = this.displayPerson.bind(this);
   }
 
   handleChange(evt) {
@@ -31,6 +32,26 @@ class Home extends React.Component {
       personName: "",
       priority: "",
     });
+  }
+
+  displayPerson(queue) {
+    let person;
+    let rows = [];
+    let newQueue = [...queue];
+    for (let i = 0; i < 3; i++) {
+      //Add table row for each person
+      person = removePriorityQueue(newQueue);
+      if (person) {
+        rows.push(
+          <tr key={person.personName}>
+            <td>{i + 1}</td>
+            <td>{person.personName}</td>
+            <td>{person.priority}</td>
+          </tr>
+        );
+      }
+    }
+    return rows;
   }
 
   render() {
@@ -74,18 +95,7 @@ class Home extends React.Component {
               <th>Priority</th>
             </tr>
           </thead>
-          <tbody>
-            {this.props.queue.map((person, idx) => {
-              //Add table row for each person
-              return (
-                <tr key={person.personName}>
-                  <td>{idx + 1}</td>
-                  <td>{person.personName}</td>
-                  <td>{person.priority}</td>
-                </tr>
-              );
-            })}
-          </tbody>
+          <tbody>{this.displayPerson(this.props.queue)}</tbody>
         </Table>
       </Container>
     );
