@@ -292,7 +292,6 @@ var Home = /*#__PURE__*/function (_React$Component) {
         }
       }
 
-      console.log("not displayed ", newQueue);
       return rows;
     }
   }, {
@@ -620,7 +619,7 @@ function addPriorityQueue(queue, person) {
   var idx = queue.length - 1;
   var parentIdx = Math.floor((idx - 1) / 2); //Loop until the parent is less than the new person, or new person is at 0th index
 
-  while (queue[parentIdx] && person.priority < queue[parentIdx].priority) {
+  while (queue[parentIdx] && queue[idx].priority < queue[parentIdx].priority) {
     swapHelper(queue, idx, parentIdx);
     idx = parentIdx;
     parentIdx = Math.floor((idx - 1) / 2);
@@ -631,7 +630,6 @@ function addPriorityQueue(queue, person) {
 
 
 function removePriorityQueue(queue) {
-  console.log("Get next from queue");
   var idx = 0;
   var leftChild = 1;
   var rightChild = 2; //Swap first and last elements
@@ -641,43 +639,30 @@ function removePriorityQueue(queue) {
   //While the priority of the current node is less than either of its children
 
   while (queue[leftChild] && queue[idx].priority > queue[leftChild].priority || queue[rightChild] && queue[idx].priority > queue[rightChild].priority) {
-    console.log("while current node", queue[idx], "at index ", idx, "and left child & right child: ", queue[leftChild], queue[rightChild]); //If the current node has a right child
-
+    //If the current node has a right child
     if (queue[rightChild]) {
-      console.log("has right child"); //Check if left child has higher priority than right child
-
+      //Check if left child has higher priority than right child
       if (queue[leftChild].priority < queue[rightChild].priority) {
-        console.log("left priority less than right, swap left");
         swapHelper(queue, idx, leftChild);
         idx = leftChild;
       } //Check if right child has higher priority than left child
       else if (queue[rightChild].priority < queue[leftChild].priority) {
-        console.log("right priority is less than left, swap right");
         swapHelper(queue, idx, rightChild);
         idx = rightChild;
       } //If neither is less than or greater than, children have equal priority
       else {
-        console.log("children have same priority"); //Check if left child has earlier time
-
+        //Check if left child has earlier time
         if (queue[leftChild].time < queue[rightChild].time) {
-          console.log("".concat(queue[leftChild].personName, " "), "arrived at ", queue[leftChild].time);
-          console.log("".concat(queue[rightChild].personName, " "), "arrived at ", queue[rightChild].time);
-          console.log("swap left");
           swapHelper(queue, idx, leftChild);
           idx = leftChild;
         } //If right child has earlier time
         else {
-          console.log("".concat(queue[leftChild].personName, " "), "arrived at ", queue[leftChild].time);
-          console.log("".concat(queue[rightChild].personName, " "), "arrived at ", queue[rightChild].time);
-          console.log("swap right");
           swapHelper(queue, idx, rightChild);
           idx = rightChild;
         }
       }
     } //If there is no right child
     else {
-      console.log("no right child");
-      console.log("swap left");
       swapHelper(queue, idx, leftChild);
       idx = leftChild;
     } //Get right and left child of new node
@@ -687,7 +672,6 @@ function removePriorityQueue(queue) {
     rightChild = idx * 2 + 2;
   }
 
-  console.log("no more swaps\n ");
   return root;
 }
 
@@ -727,12 +711,20 @@ var initialState = [{
   time: 1642175006577
 }, {
   personName: "third here",
-  priority: "2",
+  priority: "1",
   time: 1642175006578
+}, {
+  personName: "fifth here",
+  priority: "2",
+  time: 1642175006579
 }, {
   personName: "fourth here",
   priority: "2",
-  time: 1642175006578
+  time: 1642175006576
+}, {
+  personName: "sixth here",
+  priority: "2",
+  time: 1642175006582
 }];
 
 /***/ }),
