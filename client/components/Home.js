@@ -23,12 +23,14 @@ class Home extends React.Component {
   //Add person dispatch using input state
   onSubmit(evt) {
     evt.preventDefault();
+    const date = new Date();
+    this.props.addPerson({ ...this.state, time: date.getTime() });
+
+    //Reset inputs
     this.setState({
       personName: "",
       priority: "",
     });
-    const date = new Date();
-    this.props.addPerson({ ...this.state, time: date.getTime() });
   }
 
   render() {
@@ -59,6 +61,9 @@ class Home extends React.Component {
           </Form.Group>
           <Button variant="primary" type="submit" onClick={this.onSubmit}>
             Add Person
+          </Button>
+          <Button variant="primary" onClick={this.props.removePerson}>
+            See next person
           </Button>
         </Form>
         <Table bordered hover>

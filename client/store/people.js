@@ -88,19 +88,18 @@ export function removePriorityQueue(queue) {
     leftChild = idx * 2 + 1;
     rightChild = idx * 2 + 2;
   }
-
-  return queue.pop();
+  queue.pop();
+  return queue;
 }
 
 export default function (state = [], action) {
   switch (action.type) {
     case ADD_PERSON:
-      const queueToAdd = state;
+      const queueToAdd = [...state];
       return addPriorityQueue(queueToAdd, action.person);
     case REMOVE_PERSON:
-      const queueToRemove = state;
-      removePriorityQueue(queueToRemove);
-      return queueToRemove;
+      const queueToRemove = [...state];
+      return removePriorityQueue(queueToRemove);
     default:
       return state;
   }

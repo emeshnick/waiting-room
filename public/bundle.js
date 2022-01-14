@@ -250,14 +250,15 @@ var Home = /*#__PURE__*/function (_React$Component) {
     key: "onSubmit",
     value: function onSubmit(evt) {
       evt.preventDefault();
+      var date = new Date();
+      this.props.addPerson(_objectSpread(_objectSpread({}, this.state), {}, {
+        time: date.getTime()
+      })); //Reset inputs
+
       this.setState({
         personName: "",
         priority: ""
       });
-      var date = new Date();
-      this.props.addPerson(_objectSpread(_objectSpread({}, this.state), {}, {
-        time: date.getTime()
-      }));
     }
   }, {
     key: "render",
@@ -284,7 +285,10 @@ var Home = /*#__PURE__*/function (_React$Component) {
         variant: "primary",
         type: "submit",
         onClick: this.onSubmit
-      }, "Add Person")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Table"], {
+      }, "Add Person"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Button"], {
+        variant: "primary",
+        onClick: this.props.removePerson
+      }, "See next person")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Table"], {
         bordered: true,
         hover: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Priority"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.queue.map(function (person, idx) {
@@ -553,6 +557,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPerson", function() { return addPerson; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removePerson", function() { return removePerson; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removePriorityQueue", function() { return removePriorityQueue; });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var ADD_PERSON = "ADD_PERSON";
 var REMOVE_PERSON = "REMOVE_PERSON";
 var addPerson = function addPerson(person) {
@@ -634,7 +650,8 @@ function removePriorityQueue(queue) {
     rightChild = idx * 2 + 2;
   }
 
-  return queue.pop();
+  queue.pop();
+  return queue;
 }
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
@@ -642,13 +659,14 @@ function removePriorityQueue(queue) {
 
   switch (action.type) {
     case ADD_PERSON:
-      var queueToAdd = state;
+      var queueToAdd = _toConsumableArray(state);
+
       return addPriorityQueue(queueToAdd, action.person);
 
     case REMOVE_PERSON:
-      var queueToRemove = state;
-      removePriorityQueue(queueToRemove);
-      return queueToRemove;
+      var queueToRemove = _toConsumableArray(state);
+
+      return removePriorityQueue(queueToRemove);
 
     default:
       return state;
