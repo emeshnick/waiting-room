@@ -309,6 +309,9 @@ var mapDispatch = function mapDispatch(dispatch) {
   return {
     addPerson: function addPerson(person) {
       return dispatch(Object(_store_people__WEBPACK_IMPORTED_MODULE_3__["addPerson"])(person));
+    },
+    removePerson: function removePerson() {
+      return dispatch(Object(_store_people__WEBPACK_IMPORTED_MODULE_3__["removePerson"])());
     }
   };
 };

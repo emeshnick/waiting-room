@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Form, Button, Table } from "react-bootstrap";
 import { connect } from "react-redux";
-import { addPerson } from "../store/people";
+import { addPerson, removePerson, removePriorityQueue } from "../store/people";
 
 class Home extends React.Component {
   constructor(props) {
@@ -96,6 +96,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     addPerson: (person) => dispatch(addPerson(person)),
+    removePerson: () => dispatch(removePerson()),
   };
 };
 
