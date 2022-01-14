@@ -14,10 +14,17 @@ export const removePerson = () => {
   };
 };
 
+//Function takes the existing queue and the person to be added
+//Min heap structure
 function addPriorityQueue(queue, person) {
+  //Add person to end of array
+  queue.push(person);
+
   let idx = queue.length - 1;
   let parentIdx = Math.floor((idx - 1) / 2);
   let temp;
+
+  //Loop until the parent is less than the new person, or new person is at 0th index
   while (queue[parentIdx] && person.priority < queue[parentIdx].priority) {
     temp = queue[parentIdx];
     queue[parentIdx] = person;
@@ -26,13 +33,17 @@ function addPriorityQueue(queue, person) {
     idx = parentIdx;
     parentIdx = Math.floor((idx - 1) / 2);
   }
+
   return queue;
 }
 
-function removePriorityQueue(queue) {
+//Remove the first element but first swap elements to maintain structure
+export function removePriorityQueue(queue) {
   let idx = 0;
   let leftChild = 1;
   let rightChild = 2;
+
+  //Swap first and last elements
   let temp = queue[queue.length - 1];
   queue[queue.length - 1] = queue[idx];
   queue[idx] = temp;
@@ -77,17 +88,19 @@ function removePriorityQueue(queue) {
     leftChild = idx * 2 + 1;
     rightChild = idx * 2 + 2;
   }
-  queue.pop();
-  return queue;
+
+  return queue.pop();
 }
 
 export default function (state = [], action) {
   switch (action.type) {
     case ADD_PERSON:
-      const queue = state;
-      return addPriorityQueue(queue, action.person);
+      const queueToAdd = state;
+      return addPriorityQueue(queueToAdd, action.person);
     case REMOVE_PERSON:
-      return;
+      const queueToRemove = state;
+      removePriorityQueue(queueToRemove);
+      return queueToRemove;
     default:
       return state;
   }

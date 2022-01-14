@@ -20,6 +20,7 @@ class Home extends React.Component {
     });
   }
 
+  //Add person dispatch using input state
   onSubmit(evt) {
     evt.preventDefault();
     this.setState({
@@ -33,8 +34,7 @@ class Home extends React.Component {
   render() {
     return (
       <Container>
-        <h1>Home</h1>
-        <h2>Waiting Room</h2>
+        <h1>Waiting Room</h1>
         <p>Add patients and see the next patient based on priority</p>
         <Form>
           <Form.Group className="mb-3" controlId="personName">
@@ -71,6 +71,7 @@ class Home extends React.Component {
           </thead>
           <tbody>
             {this.props.queue.map((person, idx) => {
+              //Add table row for each person
               return (
                 <tr key={person.personName}>
                   <td>{idx + 1}</td>

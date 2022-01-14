@@ -244,7 +244,8 @@ var Home = /*#__PURE__*/function (_React$Component) {
     key: "handleChange",
     value: function handleChange(evt) {
       this.setState(_defineProperty({}, evt.target.name, evt.target.value));
-    }
+    } //Add person dispatch using input state
+
   }, {
     key: "onSubmit",
     value: function onSubmit(evt) {
@@ -261,7 +262,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Waiting Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add patients and see the next patient based on priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Group, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Waiting Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add patients and see the next patient based on priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Group, {
         className: "mb-3",
         controlId: "personName"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Label, null, "Patient Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Control, {
@@ -287,6 +288,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         bordered: true,
         hover: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("thead", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Number"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("th", null, "Priority"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null, this.props.queue.map(function (person, idx) {
+        //Add table row for each person
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: person.personName
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, idx + 1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, person.personName), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("td", null, person.priority));
@@ -540,13 +542,14 @@ var store = Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(reducer, m
 /*!********************************!*\
   !*** ./client/store/people.js ***!
   \********************************/
-/*! exports provided: addPerson, removePerson, default */
+/*! exports provided: addPerson, removePerson, removePriorityQueue, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addPerson", function() { return addPerson; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removePerson", function() { return removePerson; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removePriorityQueue", function() { return removePriorityQueue; });
 var ADD_PERSON = "ADD_PERSON";
 var REMOVE_PERSON = "REMOVE_PERSON";
 var addPerson = function addPerson(person) {
@@ -559,12 +562,15 @@ var removePerson = function removePerson() {
   return {
     type: REMOVE_PERSON
   };
-};
+}; //Function takes the existing queue and the person to be added
+//Min heap structure
 
 function addPriorityQueue(queue, person) {
+  //Add person to end of array
+  queue.push(person);
   var idx = queue.length - 1;
   var parentIdx = Math.floor((idx - 1) / 2);
-  var temp;
+  var temp; //Loop until the parent is less than the new person, or new person is at 0th index
 
   while (queue[parentIdx] && person.priority < queue[parentIdx].priority) {
     temp = queue[parentIdx];
@@ -575,12 +581,14 @@ function addPriorityQueue(queue, person) {
   }
 
   return queue;
-}
+} //Remove the first element but first swap elements to maintain structure
+
 
 function removePriorityQueue(queue) {
   var idx = 0;
   var leftChild = 1;
-  var rightChild = 2;
+  var rightChild = 2; //Swap first and last elements
+
   var temp = queue[queue.length - 1];
   queue[queue.length - 1] = queue[idx];
   queue[idx] = temp; //Bubble down the swapped person by priority, while also ordering by time if two children have the same priority
@@ -623,21 +631,21 @@ function removePriorityQueue(queue) {
     rightChild = idx * 2 + 2;
   }
 
-  queue.pop();
-  return queue;
+  return queue.pop();
 }
-
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
     case ADD_PERSON:
-      var queue = state;
-      return addPriorityQueue(queue, action.person);
+      var queueToAdd = state;
+      return addPriorityQueue(queueToAdd, action.person);
 
     case REMOVE_PERSON:
-      return;
+      var queueToRemove = state;
+      removePriorityQueue(queueToRemove);
+      return queueToRemove;
 
     default:
       return state;
