@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Button, Table } from "react-bootstrap";
+import { Container, Form, Button, Table, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addPerson, removePerson, removePriorityQueue } from "../store/people";
 
@@ -39,16 +39,10 @@ class Home extends React.Component {
     let rows = [];
     let newQueue = [...queue];
     for (let i = 0; i < 3; i++) {
-      //Add table row for each person
+      //Add alert for next three people
       person = removePriorityQueue(newQueue);
       if (person) {
-        rows.push(
-          <tr key={person.personName}>
-            <td>{i + 1}</td>
-            <td>{person.personName}</td>
-            <td>{person.priority}</td>
-          </tr>
-        );
+        rows.push(<Alert key={person.time}>{i + 1} person.personName</Alert>);
       }
     }
     return rows;
@@ -87,16 +81,7 @@ class Home extends React.Component {
             See next person
           </Button>
         </Form>
-        <Table bordered hover>
-          <thead>
-            <tr>
-              <th>Number</th>
-              <th>Name</th>
-              <th>Priority</th>
-            </tr>
-          </thead>
-          <tbody>{this.displayPerson(this.props.queue)}</tbody>
-        </Table>
+        <Container>{this.displayPerson(this.props.queue)}</Container>
       </Container>
     );
   }
