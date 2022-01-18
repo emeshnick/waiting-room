@@ -1,8 +1,7 @@
 import React from "react";
-import { Container, Form, Button, Table, Alert } from "react-bootstrap";
+import { Container, Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addPerson, removePerson, removePriorityQueue } from "../store/people";
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -38,11 +37,20 @@ class Home extends React.Component {
     let person;
     let rows = [];
     let newQueue = [...queue];
+    const variants = ["warning", "info", "success"];
     for (let i = 0; i < 3; i++) {
       //Add alert for next three people
       person = removePriorityQueue(newQueue);
       if (person) {
-        rows.push(<Alert key={person.time}>{i + 1} person.personName</Alert>);
+        rows.push(
+          <Alert
+            key={person.time}
+            className="text-center"
+            variant={variants[i]}
+          >
+            {person.personName}
+          </Alert>
+        );
       }
     }
     return rows;
@@ -55,7 +63,7 @@ class Home extends React.Component {
         <p>Add patients and see the next patient based on priority</p>
         <Form>
           <Form.Group className="mb-3" controlId="personName">
-            <Form.Label>Patient Name</Form.Label>
+            <Form.Label>Name</Form.Label>
             <Form.Control
               type="string"
               placeholder="Enter name"
@@ -74,14 +82,18 @@ class Home extends React.Component {
               onChange={this.handleChange}
             />
           </Form.Group>
-          <Button variant="primary" type="submit" onClick={this.onSubmit}>
-            Add Person
-          </Button>
-          <Button variant="primary" onClick={this.props.removePerson}>
-            See next person
-          </Button>
+          <div className="d-flex justify-content-around">
+            <Button variant="primary" type="submit" onClick={this.onSubmit}>
+              Add Person
+            </Button>
+            <Button variant="primary" onClick={this.props.removePerson}>
+              See next person
+            </Button>
+          </div>
         </Form>
-        <Container>{this.displayPerson(this.props.queue)}</Container>
+        <Container fluid className="p-4">
+          {this.displayPerson(this.props.queue)}
+        </Container>
       </Container>
     );
   }
