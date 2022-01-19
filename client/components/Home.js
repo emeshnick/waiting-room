@@ -8,6 +8,7 @@ class Home extends React.Component {
     this.state = {
       personName: "",
       priority: "",
+      validated: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
@@ -61,7 +62,7 @@ class Home extends React.Component {
       <Container>
         <h1>Waiting Room</h1>
         <p>Add patients and see the next patient based on priority</p>
-        <Form>
+        <Form noValidate onSubmit={this.onSubmit}>
           <Form.Group className="mb-3" controlId="personName">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -81,9 +82,12 @@ class Home extends React.Component {
               value={this.state.priority}
               onChange={this.handleChange}
             />
+            <Form.Text className="text-muted">
+              The lower the number, the higher the priority.
+            </Form.Text>
           </Form.Group>
           <div className="d-flex justify-content-around">
-            <Button variant="primary" type="submit" onClick={this.onSubmit}>
+            <Button variant="primary" type="submit">
               Add Person
             </Button>
             <Button variant="primary" onClick={this.props.removePerson}>
