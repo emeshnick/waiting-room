@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Button, InputGroup, Alert } from "react-bootstrap";
+import { Container, Form, Button, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addPerson, removePerson, removePriorityQueue } from "../store/people";
 class Home extends React.Component {
@@ -13,6 +13,9 @@ class Home extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.displayPerson = this.displayPerson.bind(this);
+
+    //Different variants for bootstrap alerts displaying next patients
+    this.variants = ["warning", "info", "success"];
   }
 
   handleChange(evt) {
@@ -45,7 +48,6 @@ class Home extends React.Component {
     let person;
     let rows = [];
     let newQueue = [...queue];
-    const variants = ["warning", "info", "success"];
     for (let i = 0; i < 3; i++) {
       //Add alert for next three people
       person = removePriorityQueue(newQueue);
@@ -54,7 +56,7 @@ class Home extends React.Component {
           <Alert
             key={person.time}
             className="text-center"
-            variant={variants[i]}
+            variant={this.variants[i]}
           >
             {person.personName}
           </Alert>
@@ -68,7 +70,10 @@ class Home extends React.Component {
     return (
       <Container>
         <h1>Waiting Room</h1>
-        <p>Add patients and see the next patient based on priority</p>
+        <p>
+          Add people to the queue and see the next person based on arrival time
+          and priority
+        </p>
         <Form
           noValidate
           validated={this.state.validated}

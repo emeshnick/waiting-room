@@ -250,7 +250,9 @@ var Home = /*#__PURE__*/function (_React$Component) {
     };
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_this));
     _this.onSubmit = _this.onSubmit.bind(_assertThisInitialized(_this));
-    _this.displayPerson = _this.displayPerson.bind(_assertThisInitialized(_this));
+    _this.displayPerson = _this.displayPerson.bind(_assertThisInitialized(_this)); //Different variants for bootstrap alerts displaying next patients
+
+    _this.variants = ["warning", "info", "success"];
     return _this;
   }
 
@@ -292,8 +294,6 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
       var newQueue = _toConsumableArray(queue);
 
-      var variants = ["warning", "info", "success"];
-
       for (var i = 0; i < 3; i++) {
         //Add alert for next three people
         person = Object(_store_people__WEBPACK_IMPORTED_MODULE_3__["removePriorityQueue"])(newQueue);
@@ -302,7 +302,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
           rows.push( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Alert"], {
             key: person.time,
             className: "text-center",
-            variant: variants[i]
+            variant: this.variants[i]
           }, person.personName));
         }
       }
@@ -312,7 +312,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Waiting Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add patients and see the next patient based on priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Waiting Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add people to the queue and see the next person based on arrival time and priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
         noValidate: true,
         validated: this.state.validated,
         onSubmit: this.onSubmit
