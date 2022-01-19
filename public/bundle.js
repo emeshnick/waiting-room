@@ -268,6 +268,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
     _this.displayPerson = _this.displayPerson.bind(_assertThisInitialized(_this)); //Different variants for bootstrap alerts displaying next patients
 
     _this.variants = ["warning", "info", "success"];
+    _this.messages = ["Next up: ", "Second in line: ", "Third in line: "];
     return _this;
   }
 
@@ -318,7 +319,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
             key: person.time,
             className: "text-center",
             variant: this.variants[i]
-          }, person.personName));
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("strong", null, this.messages[i]), person.personName));
         }
       }
 
@@ -327,7 +328,12 @@ var Home = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Waiting Room"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add people to the queue and see the next person based on arrival time and priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "text-center",
+        style: {
+          marginTop: "2%"
+        }
+      }, "Your Priority Queue"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Add people to the queue and see the next person based on arrival time and priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"], {
         noValidate: true,
         validated: this.state.validated,
         onSubmit: this.onSubmit
@@ -368,7 +374,9 @@ var Home = /*#__PURE__*/function (_React$Component) {
       }, "See next person"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Container"], {
         fluid: true,
         className: "p-4"
-      }, this.displayPerson(this.props.queue)));
+      }, this.props.queue.length ? this.displayPerson(this.props.queue) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Alert"], {
+        variant: "warning"
+      }, "Add a new person and their priority to start your queue.")));
     }
   }]);
 

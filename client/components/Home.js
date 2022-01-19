@@ -16,6 +16,7 @@ class Home extends React.Component {
 
     //Different variants for bootstrap alerts displaying next patients
     this.variants = ["warning", "info", "success"];
+    this.messages = ["Next up: ", "Second in line: ", "Third in line: "];
   }
 
   handleChange(evt) {
@@ -59,6 +60,7 @@ class Home extends React.Component {
             className="text-center"
             variant={this.variants[i]}
           >
+            <strong>{this.messages[i]}</strong>
             {person.personName}
           </Alert>
         );
@@ -70,7 +72,9 @@ class Home extends React.Component {
   render() {
     return (
       <Container>
-        <h1>Waiting Room</h1>
+        <h1 className="text-center" style={{ marginTop: "2%" }}>
+          Your Priority Queue
+        </h1>
         <p>
           Add people to the queue and see the next person based on arrival time
           and priority
@@ -120,8 +124,15 @@ class Home extends React.Component {
             </Button>
           </div>
         </Form>
+
         <Container fluid className="p-4">
-          {this.displayPerson(this.props.queue)}
+          {this.props.queue.length ? (
+            this.displayPerson(this.props.queue)
+          ) : (
+            <Alert variant="warning">
+              Add a new person and their priority to start your queue.
+            </Alert>
+          )}
         </Container>
       </Container>
     );
