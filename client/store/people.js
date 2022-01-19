@@ -99,7 +99,7 @@ function swapHelper(queue, idx1, idx2) {
   queue[idx2] = temp;
 }
 
-export default function (state = initialState, action) {
+export default function (state = [], action) {
   switch (action.type) {
     case ADD_PERSON:
       const queueToAdd = [...state];
@@ -112,12 +112,3 @@ export default function (state = initialState, action) {
       return state;
   }
 }
-
-const initialState = [
-  { personName: "first here", priority: "1", time: 1642175006576 },
-  { personName: "second here", priority: "1", time: 1642175006577 },
-  { personName: "third here", priority: "1", time: 1642175006578 },
-  { personName: "fifth here", priority: "2", time: 1642175006579 },
-  { personName: "fourth here", priority: "2", time: 1642175006576 },
-  { personName: "sixth here", priority: "2", time: 1642175006582 },
-];

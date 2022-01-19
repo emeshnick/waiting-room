@@ -721,7 +721,7 @@ function swapHelper(queue, idx1, idx2) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var action = arguments.length > 1 ? arguments[1] : undefined;
 
   switch (action.type) {
@@ -740,31 +740,6 @@ function swapHelper(queue, idx1, idx2) {
       return state;
   }
 });
-var initialState = [{
-  personName: "first here",
-  priority: "1",
-  time: 1642175006576
-}, {
-  personName: "second here",
-  priority: "1",
-  time: 1642175006577
-}, {
-  personName: "third here",
-  priority: "1",
-  time: 1642175006578
-}, {
-  personName: "fifth here",
-  priority: "2",
-  time: 1642175006579
-}, {
-  personName: "fourth here",
-  priority: "2",
-  time: 1642175006576
-}, {
-  personName: "sixth here",
-  priority: "2",
-  time: 1642175006582
-}];
 
 /***/ }),
 
