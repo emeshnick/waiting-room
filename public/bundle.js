@@ -263,16 +263,25 @@ var Home = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "onSubmit",
     value: function onSubmit(evt) {
-      evt.preventDefault();
-      var date = new Date();
-      this.props.addPerson(_objectSpread(_objectSpread({}, this.state), {}, {
-        time: date.getTime()
-      })); //Reset inputs
+      evt.preventDefault(); //Get form to check validity of entry before adding person
 
-      this.setState({
-        personName: "",
-        priority: ""
-      });
+      var form = evt.currentTarget;
+
+      if (form.checkValidity() === false) {
+        this.setState({
+          validated: true
+        });
+      } else {
+        var date = new Date();
+        this.props.addPerson(_objectSpread(_objectSpread({}, this.state), {}, {
+          time: date.getTime()
+        })); //Reset inputs
+
+        this.setState({
+          personName: "",
+          priority: ""
+        });
+      }
     }
   }, {
     key: "displayPerson",
@@ -309,6 +318,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         className: "mb-3",
         controlId: "personName"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Label, null, "Name"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Control, {
+        required: true,
         type: "string",
         placeholder: "Enter name",
         name: "personName",
@@ -318,6 +328,7 @@ var Home = /*#__PURE__*/function (_React$Component) {
         className: "mb-3",
         controlId: "priority"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Label, null, "Priority"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__["Form"].Control, {
+        required: true,
         type: "number",
         placeholder: "Enter priority",
         name: "priority",

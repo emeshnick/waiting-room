@@ -24,14 +24,20 @@ class Home extends React.Component {
   //Add person dispatch using input state
   onSubmit(evt) {
     evt.preventDefault();
-    const date = new Date();
-    this.props.addPerson({ ...this.state, time: date.getTime() });
+    //Get form to check validity of entry before adding person
+    const form = evt.currentTarget;
+    if (form.checkValidity() === false) {
+      this.setState({ validated: true });
+    } else {
+      const date = new Date();
+      this.props.addPerson({ ...this.state, time: date.getTime() });
 
-    //Reset inputs
-    this.setState({
-      personName: "",
-      priority: "",
-    });
+      //Reset inputs
+      this.setState({
+        personName: "",
+        priority: "",
+      });
+    }
   }
 
   displayPerson(queue) {
@@ -66,6 +72,7 @@ class Home extends React.Component {
           <Form.Group className="mb-3" controlId="personName">
             <Form.Label>Name</Form.Label>
             <Form.Control
+              required
               type="string"
               placeholder="Enter name"
               name="personName"
@@ -76,6 +83,7 @@ class Home extends React.Component {
           <Form.Group className="mb-3" controlId="priority">
             <Form.Label>Priority</Form.Label>
             <Form.Control
+              required
               type="number"
               placeholder="Enter priority"
               name="priority"
