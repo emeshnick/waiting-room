@@ -27,6 +27,7 @@ class Home extends React.Component {
   //Add person dispatch using input state
   onSubmit(evt) {
     evt.preventDefault();
+
     //Get form to check validity of entry before adding person
     const form = evt.currentTarget;
     if (form.checkValidity() === false) {
