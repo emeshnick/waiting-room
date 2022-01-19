@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Button, Row, Col, Alert } from "react-bootstrap";
+import { Container, Form, Button, InputGroup, Alert } from "react-bootstrap";
 import { connect } from "react-redux";
 import { addPerson, removePerson, removePriorityQueue } from "../store/people";
 class Home extends React.Component {
@@ -68,17 +68,24 @@ class Home extends React.Component {
       <Container>
         <h1>Waiting Room</h1>
         <p>Add patients and see the next patient based on priority</p>
-        <Form noValidate onSubmit={this.onSubmit}>
+        <Form
+          noValidate
+          validated={this.state.validated}
+          onSubmit={this.onSubmit}
+        >
           <Form.Group className="mb-3" controlId="personName">
             <Form.Label>Name</Form.Label>
             <Form.Control
               required
-              type="string"
+              type="text"
               placeholder="Enter name"
               name="personName"
               value={this.state.personName}
               onChange={this.handleChange}
             />
+            <Form.Control.Feedback type="invalid">
+              Please enter a name
+            </Form.Control.Feedback>
           </Form.Group>
           <Form.Group className="mb-3" controlId="priority">
             <Form.Label>Priority</Form.Label>
@@ -90,6 +97,9 @@ class Home extends React.Component {
               value={this.state.priority}
               onChange={this.handleChange}
             />
+            <Form.Control.Feedback type="invalid">
+              Please enter a priority
+            </Form.Control.Feedback>
             <Form.Text className="text-muted">
               The lower the number, the higher the priority.
             </Form.Text>
