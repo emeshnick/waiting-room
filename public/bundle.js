@@ -279,7 +279,8 @@ var Home = /*#__PURE__*/function (_React$Component) {
 
         this.setState({
           personName: "",
-          priority: ""
+          priority: "",
+          validated: false
         });
       }
     }

@@ -36,6 +36,7 @@ class Home extends React.Component {
       this.setState({
         personName: "",
         priority: "",
+        validated: false,
       });
     }
   }
