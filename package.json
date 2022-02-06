@@ -1,7 +1,7 @@
 {
-  "name": "cleanout",
+  "name": "waiting-room",
   "version": "1.0.0",
-  "description": "App to delete emails",
+  "description": "Priority queue application",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
